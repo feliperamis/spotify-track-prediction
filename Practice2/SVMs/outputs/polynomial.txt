@@ -1,0 +1,16 @@
+Statistics 10-fold cross
+Elapsed time: 1849.8773839473724
+Train Data:
+	Accuracy: 0.6571433981761767
+Test Data:
+	Confusion Matrix:
+		[1205   53  118]
+		[327 137 144]
+		[210  50 364]
+
+	Accuracy: 0.6541411042944786
+	Recall/Sensitivity: 0.5614630082959337
+	F - Measure: 0.6042691505617711
+	Best value of parameters found: {'C': 1000.0}
+	Number of supports: 3758 (5887 of them have slacks)
+	Porp. of supports: 1.4409509202453987
