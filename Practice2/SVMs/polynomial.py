@@ -23,7 +23,7 @@ plt.show()
 parval = grid_search.best_params_
 cvacc = cross_val_score(SVC(kernel="poly", degree=2, C=parval['C']), X=x_train, y=y_train, cv=K, scoring="accuracy")
 # Train
-SVM = SVC(kernel="poly", degree=2, C=parval['C'])
+SVM = SVC(kernel="poly", degree=2, C=parval['C'] , decision_function_shape='ovo')
 SVM.fit(x_train, y_train)
 # Evaluate and Save
 output = evaluate_classifier(start, SVM, x_test, y_test, parval, cvacc)

@@ -1,5 +1,5 @@
 Statistics 10-fold cross
-Elapsed time: 1849.8773839473724
+Elapsed time: 1312.9182345867157
 Train Data:
 	Accuracy: 0.6571433981761767
 Test Data:

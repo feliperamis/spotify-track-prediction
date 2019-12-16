@@ -1,6 +1,6 @@
 from preSVM import SVC, GridSearchCV
 from preSVM import cross_val_score, plt, np, time
-from preSVM import evaluate_classifier, save_output
+from preSVM import evaluate_classifier, save_output, plot_confusion_matrix
 from preSVM import x_train, y_train, x_test, y_test, K
 
 
@@ -27,6 +27,8 @@ plt.colorbar()
 plt.xticks(np.arange(len(param_grid["gamma"])), param_grid["gamma"], rotation="vertical")
 plt.yticks(np.arange(len(param_grid['C'])), param_grid['C'])
 plt.show()
+
+
 # Acc on training
 cvacc = cross_val_score(SVC(C=parval['C'], gamma=parval["gamma"]) , X=x_train,  y=y_train, cv=10, scoring="accuracy")
 # Train
