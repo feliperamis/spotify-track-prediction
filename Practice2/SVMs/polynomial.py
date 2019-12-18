@@ -29,4 +29,4 @@ output = evaluate_classifier(start, SVM, x_test, y_test, parval, cvacc)
 save_output("outputs/polynomial_ovo.txt", output)
 
 # Plot of confusion matrix
-plot_confusion_matrix(y_test, SVM.predict(y_test), 'popularity', 'cmatrix-polynomial', 'Polynomial matrix - 3 types of popularity')
+plot_confusion_matrix(y_test, SVM.predict(x_test), 'popularity', 'cmatrix-polynomial', 'Polynomial matrix - 3 types of popularity')

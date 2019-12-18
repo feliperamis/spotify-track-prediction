@@ -19,7 +19,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, recall_score
 ##  Functions  ##
 #################
 def plot_confusion_matrix(y, y_predicted, label, filename, title='Confusion matrix'):
-    confmat = sklearn.metrics.confusion_matrix(y, y_predicted)
+    confmat = confusion_matrix(y, y_predicted)
 
     fig, ax = plt.subplots(figsize=(2.5, 2.5))
     ax.matshow(confmat, cmap=plt.cm.Blues, alpha=0.3)
