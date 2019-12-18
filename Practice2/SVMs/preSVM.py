@@ -18,44 +18,28 @@ from sklearn.metrics import accuracy_score, confusion_matrix, recall_score
 #################
 ##  Functions  ##
 #################
-def plot_confusion_matrix(base_confusion_matrix, classes, normalize=True, title='Confusion matrix', cmap=plt.cm.Blues):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
-    if normalize:
-        base_confusion_matrix = base_confusion_matrix.astype('float') / base_confusion_matrix.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-    plt.imshow(base_confusion_matrix, interpolation='nearest', cmap=cmap)
+def plot_confusion_matrix(y, y_predicted, label, filename, title='Confusion matrix'):
+    confmat = sklearn.metrics.confusion_matrix(y, y_predicted)
+
+    fig, ax = plt.subplots(figsize=(2.5, 2.5))
+    ax.matshow(confmat, cmap=plt.cm.Blues, alpha=0.3)
+    for i in range(confmat.shape[0]):
+        for j in range(confmat.shape[1]):
+            ax.text(x=j, y=i, s=confmat[i, j], va='center', ha='center',fontsize=7)
+
+    plt.xlabel(f'Predicted {label}')
+    plt.ylabel(f'True {label}')
     plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
 
-    fmt = '.2f' if normalize else 'd'
-    thresh = base_confusion_matrix.max() / 2.
-    for i, j in itertools.product(range(base_confusion_matrix.shape[0]), range(base_confusion_matrix.shape[1])):
-        plt.text(j, i, format(base_confusion_matrix[i, j], fmt),
-                 horizontalalignment="center",
-                 color="white" if base_confusion_matrix[i, j] > thresh else "black")
-
-    plt.ylabel('True digit')
-    plt.xlabel('Predicted digit')
     plt.tight_layout()
+    plt.savefig(f'{filename}.png', dpi=600)
+    plt.show()
 
 def evaluate_classifier(start, clf, test_data, test_answers, parval, cvacc):
     test_predicted = clf.predict(test_data)
     acc_score = accuracy_score(test_answers, test_predicted)
     rec_score = recall_score(test_answers, test_predicted, average="macro")
     f_measure = 2 * acc_score * rec_score / (acc_score + rec_score)
-
-    # Plot of confusion matrix
-    plt.figure()
-    plot_confusion_matrix(confusion_matrix(test_answers, test_predicted), classes=[0, 1, 2], title='Confusion matrix of polynomial SVM')
-    plt.show()
 
     output = f"Statistics {K}-fold cross\n"
     output += f"Elapsed time: {time() - start}\n"

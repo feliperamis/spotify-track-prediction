@@ -35,3 +35,6 @@ SVM.fit(x_train, y_train)
 # Evaluate and Save
 output = evaluate_classifier(start, SVM, x_test, y_test, parval, cvacc)
 save_output("outputs/rbf_ovo.txt", output)
+
+# Plot of confusion matrix
+plot_confusion_matrix(y_test, SVM.predict(y_test), 'popularity', 'cmatrix-rbf', 'RBF matrix - 3 types of popularity')
